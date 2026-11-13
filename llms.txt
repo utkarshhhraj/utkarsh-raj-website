@@ -1,0 +1,25 @@
+# Utkarsh Raj
+
+> Utkarsh Raj is a Bachelor of Management Studies (BMS) student at Shaheed Sukhdev College of Business Studies (SSCBS), University of Delhi, from Bhagalpur, Bihar. National Rank 3 at the IIT Delhi Startup Expo case competition, AIR 4 in the National Consulting Olympiad 2025, AIR 109 in CUET UG 2026, and an admit to IIM Bangalore's B.Sc. (Hons.) Data Science programme.
+
+This is the official site of the Utkarsh Raj who studies BMS at SSCBS, University of Delhi (2026 to 2029) and grew up in Bhagalpur, Bihar.
+
+## Achievements
+
+- National Rank 3, Startup Expo Case Competition, IIT Delhi (2026)
+- AIR 4, National Consulting Olympiad 2025, ShARE SRCC
+- AIR 109, CUET UG 2026 (BMS)
+- AIR 23, CUET UG 2026 (BBE)
+- 3rd Position, Polygenesis: VoltEdge, IPI-DTU (2026)
+- Winner, Bihar Inter School Esports Championship 2024 (Chess), Bihar State Sports Authority
+- AIR 49, National Economics Olympiad 2025, The Economics Society, SRCC
+- 3rd, Under-17, 13th Bihar State Inter School Chess Championship (2024)
+- Bug Bounty Recognition, AfterBoards (2025)
+- Admitted to IIM Bangalore, B.Sc. (Hons.) Data Science (2026); chose SSCBS
+- Chess: 2000+ on Chess.com
+
+## Links
+
+- [Website](https://utkarshraj-azure.vercel.app/)
+- [LinkedIn](https://www.linkedin.com/in/utkarsh-raj-14b357307)
+- [GitHub](https://github.com/utkarshhhraj)

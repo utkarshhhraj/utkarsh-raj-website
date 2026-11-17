@@ -59,6 +59,9 @@ boot = ("<script>(function(){var h=document.documentElement;"
         "setTimeout(function(){h.classList.remove('is-loading')},6000)})()</script>")
 
 page = (meta.rstrip() + '\n' + tpl.rstrip() + '\n' + ld.rstrip() + '\n' + boot + '\n<style>\n' + css + '</style>\n</head>\n' + body +
+        # Vercel Web Analytics: cookie-free, served from this site (CSP 'self'); skipped on the GitHub Pages mirror
+        '<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};'
+        'if(!/github\\.io$/.test(location.hostname)){var s=document.createElement("script");s.defer=true;s.src="/_vercel/insights/script.js";document.head.appendChild(s)}</script>\n'
         '<script src="js/gsap.min.js"></script>\n<script src="js/ScrollTrigger.min.js"></script>\n<script src="js/Flip.min.js"></script>\n'
         '<script src="js/lenis.min.js"></script>\n<script>\n' + js + '</script>\n</body>\n</html>\n')
 (R / 'index.html').write_text(page)

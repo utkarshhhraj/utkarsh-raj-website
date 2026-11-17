@@ -1,0 +1,74 @@
+[
+ {
+  "img": "img/cert-iitd.jpg",
+  "title": "National Rank 3 · Startup Expo Case Competition",
+  "meta": "Rendezvous ’26 · IIT Delhi · Sep 2026",
+  "text": "IIT Delhi's startup case competition drew <b>2,700+ participants</b>. Our team of four built an investor pitch for Straeva Labs and presented it to judges and VCs in the final. It was our first case competition.",
+  "cardTitle": "National Rank 3 · Startup Expo",
+  "cardSub": "IIT Delhi · Sep 2026",
+  "alt": ""
+ },
+ {
+  "img": "img/cert-nco.jpg",
+  "title": "AIR 4 · National Consulting Olympiad 2025",
+  "meta": "ShARE · Shri Ram College of Commerce",
+  "text": "Fourth in India, <b>top 10 nationally</b>, in an olympiad on analytical thinking and problem-solving. The rank earned me a consulting internship in ShARE SRCC's Future Leaders Program.",
+  "cardTitle": "AIR 4 · National Consulting Olympiad",
+  "cardSub": "ShARE, SRCC · 2025",
+  "alt": ""
+ },
+ {
+  "img": "img/iimb-letter.jpg",
+  "title": "Admit · IIM Bangalore",
+  "meta": "B.Sc. (Hons.) Data Science · 2026",
+  "text": "Admitted to IIM Bangalore's undergraduate programme, with a minor in Economics &amp; Business, <b>on my first attempt</b>. I chose SSCBS instead.",
+  "cardTitle": "Admit · IIM Bangalore",
+  "cardSub": "B.Sc. (Hons.) Data Science · 2026",
+  "alt": ""
+ },
+ {
+  "img": "img/cert-dtu.jpg",
+  "title": "3rd Position · Polygenesis: VoltEdge",
+  "meta": "IPI-DTU · Delhi Technological University · Nov 2026",
+  "text": "A strategy case on battery swapping for electric two-wheelers with a lifetime battery warranty. <b>We built the whole deck as a team</b> and presented it to the judges.",
+  "cardTitle": "3rd Position · Polygenesis: VoltEdge",
+  "cardSub": "IPI-DTU · Nov 2026",
+  "alt": ""
+ },
+ {
+  "img": "img/cert-esports.jpg",
+  "title": "Winner · Bihar Inter School Esports Championship 2024",
+  "meta": "Chess · Bihar State Sports Authority",
+  "text": "First place in the state championship, played on Chess.com from September to November 2024. It came with a <b>₹40,000 prize</b> presented by Bihar's Sports Minister.",
+  "cardTitle": "Winner · Bihar Esports Championship, Chess",
+  "cardSub": "BSSA · 2024",
+  "alt": ""
+ },
+ {
+  "img": "img/cert-neo.jpg",
+  "title": "AIR 49 · National Economics Olympiad 2025",
+  "meta": "The Economics Society · SRCC",
+  "text": "Qualified for the final round on 30 November 2025 and finished <b>49th in India</b>.",
+  "cardTitle": "AIR 49 · National Economics Olympiad",
+  "cardSub": "Economics Society, SRCC · 2025",
+  "alt": "Utkarsh Raj's National Economics Olympiad 2025 certificate, AIR 49"
+ },
+ {
+  "img": "img/cert-chess-u17.jpg",
+  "title": "3rd, Under-17 · Bihar State Inter School Chess",
+  "meta": "13th edition · Bhagalpur · Dec 2024",
+  "text": "Third place in the Under-17 category of the state inter-school championship, organised by the Bhagalpur District Chess Association.",
+  "cardTitle": "3rd, U-17 · Bihar State Inter School Chess",
+  "cardSub": "Bhagalpur · Dec 2024",
+  "alt": ""
+ },
+ {
+  "img": "img/cert-bug.jpg",
+  "title": "Bug Bounty Recognition",
+  "meta": "AfterBoards · Jul 2025",
+  "text": "Found a critical pricing flaw that unlocked paid courses for free on AfterBoards, an EdTech platform. I <b>reported it responsibly</b> with a video proof of concept and helped the team check the fix.",
+  "cardTitle": "Bug Bounty Recognition",
+  "cardSub": "AfterBoards · Jul 2025",
+  "alt": "AfterBoards bug bounty recognition for Utkarsh Raj"
+ }
+]

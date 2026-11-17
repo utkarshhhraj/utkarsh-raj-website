@@ -29,9 +29,10 @@
     "pdfSize": "1.7 MB",
     "ask": "Design a battery-swapping network for electric two-wheelers in India that can carry a lifetime battery warranty and still make money, over a five-to-seven-year horizon.",
     "answer": "A separate battery bank owns the packs, riders buy a “virtual battery” with an 80% health floor, and the network rolls out from Bengaluru in 2027. Each ₹52 lakh hub pays back in about five years at a 15–17% return.",
-    "mine": "The financial-viability slide: CAPEX, OPEX, pricing and ROI. I built it and presented it to the judges.",
+    "mine": "We built the financial-viability slide together: CAPEX, OPEX, pricing and ROI, and presented it to the judges.",
     "note": "Case and data provided by the organisers.",
-    "captions": {}
+    "captions": {},
+    "mineLabel": "Our part"
   },
   {
     "id": "iitd-r2",

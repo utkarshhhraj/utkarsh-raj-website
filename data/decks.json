@@ -1,0 +1,53 @@
+[
+  {
+    "id": "iitd",
+    "title": "Straeva Labs: the investor pitch",
+    "event": "Startup Expo Case Competition · Rendezvous ’26 · IIT Delhi",
+    "result": "National Rank 3",
+    "field": "among 2,700+ participants",
+    "chapter": "#iitd",
+    "slides": 13,
+    "heroSlide": 1,
+    "pdf": "/decks/iitd/Utkarsh-Raj-Straeva-Labs-Pitch.pdf",
+    "pdfSize": "1.5 MB",
+    "ask": "Raise ₹100 Cr for a Bengaluru wearable health-tech company at a ₹1,000 Cr pre-money valuation, and convince a panel of judges and VCs it is worth it.",
+    "answer": "A pitch deck with a three-slide appendix: a $298B wearables and corporate-wellness market narrowed to a ₹6,000 Cr serviceable market and a ₹658–822 Cr revenue goal, unit economics with 71% blended retention and a 2.7-month CAC payback, and 9.09% dilution on the ask.",
+    "mine": "The market sizing and the financial appendix: TAM to SAM to SOM, the retention and payback maths, and the numbers behind the ask.",
+    "note": "Case and data provided by the organisers.",
+    "captions": {}
+  },
+  {
+    "id": "dtu",
+    "title": "VoltEdge: a battery-swapping network that can afford a lifetime warranty",
+    "event": "Polygenesis: VoltEdge · IPI-DTU · November 2026",
+    "result": "3rd position",
+    "field": "with Team Khatte Rasgulle",
+    "chapter": "#dtu",
+    "slides": 12,
+    "heroSlide": 6,
+    "pdf": "/decks/dtu/Utkarsh-Raj-VoltEdge-Battery-Swapping.pdf",
+    "pdfSize": "1.7 MB",
+    "ask": "Design a battery-swapping network for electric two-wheelers in India that can carry a lifetime battery warranty and still make money, over a five-to-seven-year horizon.",
+    "answer": "A separate battery bank owns the packs, riders buy a “virtual battery” with an 80% health floor, and the network rolls out from Bengaluru in 2027. Each ₹52 lakh hub pays back in about five years at a 15–17% return.",
+    "mine": "The financial-viability slide: CAPEX, OPEX, pricing and ROI. I built it and presented it to the judges.",
+    "note": "Case and data provided by the organisers.",
+    "captions": {}
+  },
+  {
+    "id": "iitd-r2",
+    "title": "Velenor Capital: growing to ₹60,000 Cr without hurting returns",
+    "event": "Startup Expo Case Competition · Round 2 · Rendezvous ’26 · IIT Delhi",
+    "result": "Advanced to the final",
+    "field": "Round 2 of the same competition",
+    "chapter": "#iitd",
+    "slides": 6,
+    "heroSlide": 1,
+    "pdf": "/decks/iitd-r2/Utkarsh-Raj-Velenor-Capital-Strategy.pdf",
+    "pdfSize": "0.9 MB",
+    "ask": "Grow Velenor Capital from ₹31,200 Cr to ₹60,000 Cr by FY29 while keeping capital adequacy and return on equity above 16%, after new 2025 digital lending rules made its fintech-partner loans far more expensive to hold.",
+    "answer": "Tier all 42 fintech partners by risk-adjusted return (co-lend, reprice or exit), build an in-house risk engine on partner data, and redeploy capital into the ₹12,500 Cr MSME franchise.",
+    "mine": "[Draft: tell me which part was yours.]",
+    "note": "Case and data provided by the organisers.",
+    "captions": {}
+  }
+]

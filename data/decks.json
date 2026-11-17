@@ -46,8 +46,9 @@
     "pdfSize": "0.9 MB",
     "ask": "Grow Velenor Capital from ₹31,200 Cr to ₹60,000 Cr by FY29 while keeping capital adequacy and return on equity above 16%, after new 2025 digital lending rules made its fintech-partner loans far more expensive to hold.",
     "answer": "Tier all 42 fintech partners by risk-adjusted return (co-lend, reprice or exit), build an in-house risk engine on partner data, and redeploy capital into the ₹12,500 Cr MSME franchise.",
-    "mine": "[Draft: tell me which part was yours.]",
+    "mine": "We built this deck as a team: the partner tiering, the in-house risk engine and the plan to move capital into MSME lending.",
     "note": "Case and data provided by the organisers.",
-    "captions": {}
+    "captions": {},
+    "mineLabel": "Our part"
   }
 ]

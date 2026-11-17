@@ -418,6 +418,33 @@ html.cursor-on,html.cursor-on *{cursor:none!important}
   #dtu .float{width:60%}
 }
 
+/* ---------- chess replay ---------- */
+.board-media{background:none;overflow:visible;border-radius:0;display:flex;flex-direction:column;gap:10px}
+.board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));aspect-ratio:1/1;height:calc(100% - 124px);max-width:100%;border-radius:10px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5);flex:none}
+.sq{background-size:100% 100%;background-repeat:no-repeat;background-position:center;aspect-ratio:1/1}
+.sq.l{background-color:#ebdcbe}.sq.d{background-color:#a7896a}
+.sq.hl.l{background-color:#e3c784}.sq.hl.d{background-color:#c0a05a}
+.sq[data-p="wK"]{background-image:url(img/pieces/wK.svg)}.sq[data-p="wQ"]{background-image:url(img/pieces/wQ.svg)}.sq[data-p="wR"]{background-image:url(img/pieces/wR.svg)}
+.sq[data-p="wB"]{background-image:url(img/pieces/wB.svg)}.sq[data-p="wN"]{background-image:url(img/pieces/wN.svg)}.sq[data-p="wP"]{background-image:url(img/pieces/wP.svg)}
+.sq[data-p="bK"]{background-image:url(img/pieces/bK.svg)}.sq[data-p="bQ"]{background-image:url(img/pieces/bQ.svg)}.sq[data-p="bR"]{background-image:url(img/pieces/bR.svg)}
+.sq[data-p="bB"]{background-image:url(img/pieces/bB.svg)}.sq[data-p="bN"]{background-image:url(img/pieces/bN.svg)}.sq[data-p="bP"]{background-image:url(img/pieces/bP.svg)}
+.pbar{display:flex;align-items:center;gap:10px;font-size:14px;min-height:26px}
+.pbar i{width:14px;height:14px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.4)}
+.pbar i.w{background:#f6f1e6}.pbar i.b{background:#1a1a1a;border-color:rgba(255,255,255,.35)}
+.pbar .tag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:3px 9px;border:1px solid var(--line);color:var(--muted)}
+.pbar.me .tag{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pbar.me b{color:var(--fg)}.pbar b{font-weight:600;color:var(--muted)}
+.pbar.turn b::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-left:8px;vertical-align:middle}
+.ch-links{display:flex;flex-wrap:wrap;gap:8px;padding-top:min(14px,1.6svh)}
+.ch-links .chip{height:34px;font-size:12.5px;padding:0 14px}
+.board-cap{display:flex;align-items:baseline;gap:14px;min-height:22px}
+.board-cap b{text-transform:none;letter-spacing:.02em;font-size:14px;color:var(--accent);font-variant-numeric:tabular-nums;min-width:9ch}
+.board-cap span{color:var(--fg);font-size:14px}
+.board-src{color:var(--muted);font-size:12.5px;line-height:1.4;max-width:60ch}
+#chess .float{width:min(30%,220px)}
+@media (min-width:861px){.scene[data-scene="chess"]{height:400svh}}
+@media (max-width:860px){#chess .float{display:none}.board{height:auto;width:100%}#chess .visual{aspect-ratio:auto;height:auto}#chess .media{position:relative;inset:auto;width:100%}}
+
 /* ---------- decks (D3–D6) ---------- */
 .decks-sec .wrap{padding-block:clamp(110px,14vh,160px)}
 .deck-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px 32px}
@@ -735,6 +762,10 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       <div class="line-item"><span class="mono">Two rounds</span><span>Round 2 was a lending case for Velenor Capital. The final was an investor pitch for Straeva Labs: market sizing, unit economics and a ₹100 Cr raise.</span></div>
       <div class="line-item"><span class="mono">The night before</span><span>One day to prepare. We slept at 6 AM and were still editing the deck in the cab to IIT Delhi.</span></div>
       <div class="line-item"><span class="mono">The room</span><span>Judges and VCs. Our first case competition, and our first podium.</span></div>
+      <div class="ch-links">
+        <a class="chip ghost" href="decks/iitd-r2/Utkarsh-Raj-Velenor-Capital-Strategy.pdf" download>Round 2 deck · PDF <span class="arr" aria-hidden="true">↓</span></a>
+        <a class="chip ghost" href="decks/iitd/Utkarsh-Raj-Straeva-Labs-Pitch.pdf" download>Final deck · PDF <span class="arr" aria-hidden="true">↓</span></a>
+      </div>
     </div>
     <div class="visual">
       <button type="button" class="media stack" data-cursor="Open" data-deck="iitd" data-slide="1" aria-label="Open the Straeva Labs deck">
@@ -801,7 +832,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
     </div>
     <div class="lines">
       <div class="line-item"><span class="mono">The case</span><span>Design a battery-swapping network for electric two-wheelers that can afford a lifetime battery warranty.</span></div>
-      <div class="line-item"><span class="mono">My part</span><span>Financial viability: CAPEX, OPEX, pricing and ROI. I built it and presented it to the judges.</span></div>
+      <div class="line-item"><span class="mono">Our part</span><span>Financial viability: CAPEX, OPEX, pricing and ROI. We built it and presented it to the judges.</span></div>
       <div class="line-item"><span class="mono">The team</span><span>Khatte Rasgulle. Yes, that is the real name.</span></div>
     </div>
     <div class="visual">
@@ -873,13 +904,16 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       <div class="line-item"><span class="mono">Off the board</span><span>Chess Coordinator at Disha Nucleus, running school tournaments from registrations to results.</span></div>
     </div>
     <div class="visual">
-      <button type="button" class="media contain" data-tilt data-cursor="View" data-cert="4" aria-label="Open the Bihar Esports Championship certificate">
-        <img src="img/cert-esports.jpg" alt="Bihar Inter School Esports Championship 2024 certificate, first place" width="672" height="475" decoding="async" loading="lazy">
-        <span class="glare"></span>
-      </button>
+      <div class="media board-media">
+        <div class="pbar" id="pTop"></div>
+        <div class="board" id="board" role="img" aria-label="Chess game replay"></div>
+        <div class="pbar" id="pBottom"></div>
+        <div class="board-cap"><b class="mono" id="bMove">Start</b><span id="bNote"></span></div>
+        <p class="board-src" id="bSrc"></p>
+      </div>
       <div class="float">
-        <button type="button" class="card paper" data-tilt data-cursor="View" data-cert="6" aria-label="Open the Under-17 chess certificate">
-          <img src="img/cert-chess-u17.jpg" alt="13th Bihar State Inter School Chess Championship certificate, 3rd in Under-17" width="657" height="516" decoding="async" loading="lazy">
+        <button type="button" class="card paper" data-tilt data-cursor="View" data-cert="4" aria-label="Open the Bihar Esports Championship certificate">
+          <img src="img/cert-esports.jpg" alt="Bihar Inter School Esports Championship 2024 certificate, first place" width="672" height="475" decoding="async" loading="lazy">
           <span class="glare"></span>
         </button>
       </div>
@@ -1044,7 +1078,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
   </div>
   <div class="v-strip" id="vStrip"></div>
 </div>
-<script type="application/json" id="certData">[{"img": "img/cert-iitd.jpg", "title": "National Rank 3 · Startup Expo Case Competition", "meta": "Rendezvous ’26 · IIT Delhi · Sep 2026", "text": "IIT Delhi's startup case competition drew <b>2,700+ participants<\/b>. Our team of four built an investor pitch for Straeva Labs and presented it to judges and VCs in the final. It was our first case competition.", "cardTitle": "National Rank 3 · Startup Expo", "cardSub": "IIT Delhi · Sep 2026", "alt": "Utkarsh Raj's IIT Delhi Startup Expo certificate of merit, third position"}, {"img": "img/cert-nco.jpg", "title": "AIR 4 · National Consulting Olympiad 2025", "meta": "ShARE · Shri Ram College of Commerce", "text": "Fourth in India, <b>top 10 nationally<\/b>, in an olympiad on analytical thinking and problem-solving. The rank earned me a consulting internship in ShARE SRCC's Future Leaders Program.", "cardTitle": "AIR 4 · National Consulting Olympiad", "cardSub": "ShARE, SRCC · 2025", "alt": "Utkarsh Raj's National Consulting Olympiad 2025 certificate of merit, fourth rank"}, {"img": "img/iimb-letter.jpg", "title": "Admit · IIM Bangalore", "meta": "B.Sc. (Hons.) Data Science · 2026", "text": "Admitted to IIM Bangalore's undergraduate programme, with a minor in Economics &amp; Business, <b>on my first attempt<\/b>. I chose SSCBS instead.", "cardTitle": "Admit · IIM Bangalore", "cardSub": "B.Sc. (Hons.) Data Science · 2026", "alt": "Utkarsh Raj's IIM Bangalore offer of admission, cropped"}, {"img": "img/cert-dtu.jpg", "title": "3rd Position · Polygenesis: VoltEdge", "meta": "IPI-DTU · Delhi Technological University · Nov 2026", "text": "A strategy case on battery swapping for electric two-wheelers with a lifetime battery warranty. <b>I owned the financial model<\/b>: CAPEX, OPEX, pricing and ROI.", "cardTitle": "3rd Position · Polygenesis: VoltEdge", "cardSub": "IPI-DTU · Nov 2026", "alt": "Utkarsh Raj's Polygenesis VoltEdge certificate, 3rd position"}, {"img": "img/cert-esports.jpg", "title": "Winner · Bihar Inter School Esports Championship 2024", "meta": "Chess · Bihar State Sports Authority", "text": "First place in the state championship, played on Chess.com from September to November 2024. It came with a <b>₹40,000 prize<\/b> presented by Bihar's Sports Minister.", "cardTitle": "Winner · Bihar Esports Championship, Chess", "cardSub": "BSSA · 2024", "alt": "Utkarsh Raj's Bihar Inter School Esports Championship 2024 certificate, first place"}, {"img": "img/cert-neo.jpg", "title": "AIR 49 · National Economics Olympiad 2025", "meta": "The Economics Society · SRCC", "text": "Qualified for the final round on 30 November 2025 and finished <b>49th in India<\/b>.", "cardTitle": "AIR 49 · National Economics Olympiad", "cardSub": "Economics Society, SRCC · 2025", "alt": "Utkarsh Raj's National Economics Olympiad 2025 certificate, AIR 49"}, {"img": "img/cert-chess-u17.jpg", "title": "3rd, Under-17 · Bihar State Inter School Chess", "meta": "13th edition · Bhagalpur · Dec 2024", "text": "Third place in the Under-17 category of the state inter-school championship, organised by the Bhagalpur District Chess Association.", "cardTitle": "3rd, U-17 · Bihar State Inter School Chess", "cardSub": "Bhagalpur · Dec 2024", "alt": "Utkarsh Raj's Bihar State Inter School Chess Championship certificate, 3rd in Under-17"}, {"img": "img/cert-bug.jpg", "title": "Bug Bounty Recognition", "meta": "AfterBoards · Jul 2025", "text": "Found a critical pricing flaw that unlocked paid courses for free on AfterBoards, an EdTech platform. I <b>reported it responsibly<\/b> with a video proof of concept and helped the team check the fix.", "cardTitle": "Bug Bounty Recognition", "cardSub": "AfterBoards · Jul 2025", "alt": "AfterBoards bug bounty recognition for Utkarsh Raj"}]</script>
+<script type="application/json" id="certData">[{"img": "img/cert-iitd.jpg", "title": "National Rank 3 · Startup Expo Case Competition", "meta": "Rendezvous ’26 · IIT Delhi · Sep 2026", "text": "IIT Delhi's startup case competition drew <b>2,700+ participants<\/b>. Our team of four built an investor pitch for Straeva Labs and presented it to judges and VCs in the final. It was our first case competition.", "cardTitle": "National Rank 3 · Startup Expo", "cardSub": "IIT Delhi · Sep 2026", "alt": "Utkarsh Raj's IIT Delhi Startup Expo certificate of merit, third position"}, {"img": "img/cert-nco.jpg", "title": "AIR 4 · National Consulting Olympiad 2025", "meta": "ShARE · Shri Ram College of Commerce", "text": "Fourth in India, <b>top 10 nationally<\/b>, in an olympiad on analytical thinking and problem-solving. The rank earned me a consulting internship in ShARE SRCC's Future Leaders Program.", "cardTitle": "AIR 4 · National Consulting Olympiad", "cardSub": "ShARE, SRCC · 2025", "alt": "Utkarsh Raj's National Consulting Olympiad 2025 certificate of merit, fourth rank"}, {"img": "img/iimb-letter.jpg", "title": "Admit · IIM Bangalore", "meta": "B.Sc. (Hons.) Data Science · 2026", "text": "Admitted to IIM Bangalore's undergraduate programme, with a minor in Economics &amp; Business, <b>on my first attempt<\/b>. I chose SSCBS instead.", "cardTitle": "Admit · IIM Bangalore", "cardSub": "B.Sc. (Hons.) Data Science · 2026", "alt": "Utkarsh Raj's IIM Bangalore offer of admission, cropped"}, {"img": "img/cert-dtu.jpg", "title": "3rd Position · Polygenesis: VoltEdge", "meta": "IPI-DTU · Delhi Technological University · Nov 2026", "text": "A strategy case on battery swapping for electric two-wheelers with a lifetime battery warranty. <b>We built the financial model<\/b>: CAPEX, OPEX, pricing and ROI.", "cardTitle": "3rd Position · Polygenesis: VoltEdge", "cardSub": "IPI-DTU · Nov 2026", "alt": "Utkarsh Raj's Polygenesis VoltEdge certificate, 3rd position"}, {"img": "img/cert-esports.jpg", "title": "Winner · Bihar Inter School Esports Championship 2024", "meta": "Chess · Bihar State Sports Authority", "text": "First place in the state championship, played on Chess.com from September to November 2024. It came with a <b>₹40,000 prize<\/b> presented by Bihar's Sports Minister.", "cardTitle": "Winner · Bihar Esports Championship, Chess", "cardSub": "BSSA · 2024", "alt": "Utkarsh Raj's Bihar Inter School Esports Championship 2024 certificate, first place"}, {"img": "img/cert-neo.jpg", "title": "AIR 49 · National Economics Olympiad 2025", "meta": "The Economics Society · SRCC", "text": "Qualified for the final round on 30 November 2025 and finished <b>49th in India<\/b>.", "cardTitle": "AIR 49 · National Economics Olympiad", "cardSub": "Economics Society, SRCC · 2025", "alt": "Utkarsh Raj's National Economics Olympiad 2025 certificate, AIR 49"}, {"img": "img/cert-chess-u17.jpg", "title": "3rd, Under-17 · Bihar State Inter School Chess", "meta": "13th edition · Bhagalpur · Dec 2024", "text": "Third place in the Under-17 category of the state inter-school championship, organised by the Bhagalpur District Chess Association.", "cardTitle": "3rd, U-17 · Bihar State Inter School Chess", "cardSub": "Bhagalpur · Dec 2024", "alt": "Utkarsh Raj's Bihar State Inter School Chess Championship certificate, 3rd in Under-17"}, {"img": "img/cert-bug.jpg", "title": "Bug Bounty Recognition", "meta": "AfterBoards · Jul 2025", "text": "Found a critical pricing flaw that unlocked paid courses for free on AfterBoards, an EdTech platform. I <b>reported it responsibly<\/b> with a video proof of concept and helped the team check the fix.", "cardTitle": "Bug Bounty Recognition", "cardSub": "AfterBoards · Jul 2025", "alt": "AfterBoards bug bounty recognition for Utkarsh Raj"}]</script>
 <script src="js/gsap.min.js"></script>
 <script src="js/ScrollTrigger.min.js"></script>
 <script src="js/Flip.min.js"></script>
@@ -1208,7 +1242,7 @@ function renderDecks() {
   grid.innerHTML = DECKS.map(d => {
     const h = d.heroSlide || 1;
     const nums = [h, Math.min(h + 1, d.slides), Math.min(h + 2, d.slides)];
-    const mine = d.mine && !/^\[Draft/.test(d.mine) ? `<div class="line-item"><span class="mono">My part</span><span>${esc(d.mine)}</span></div>` : '';
+    const mine = d.mine && !/^\[Draft/.test(d.mine) ? `<div class="line-item"><span class="mono">${esc(d.mineLabel || 'My part')}</span><span>${esc(d.mine)}</span></div>` : '';
     return `<article class="deck-card rv" id="deck-${d.id}">
       <button type="button" class="deck-stack" data-deck="${d.id}" data-slide="${h}" data-cursor="Open" aria-label="Open the ${esc(d.title)} deck">
         <span class="slide s1">${pictureHTML(d.id, nums[0], '(max-width:860px) 90vw, 560px', `${esc(d.title)}, slide ${nums[0]}`)}</span>
@@ -1241,6 +1275,43 @@ const decksReady = fetch('data/decks.json', { credentials: 'same-origin' })
   .then(r => r.ok ? r.json() : [])
   .catch(() => [])
   .then(list => { DECKS = Array.isArray(list) ? list : []; renderDecks(); });
+
+
+/* ---------- chess replay (data/chess.json, built by scripts/chess.mjs) ---------- */
+let CHESS = null, squares = [], curPly = -1;
+const boardEl = $('#board'), bMove = $('#bMove'), bNote = $('#bNote'), bSrc = $('#bSrc');
+function setPly(k) {
+  if (!CHESS) return;
+  const last = CHESS.plies.length - 1;
+  k = Math.max(0, Math.min(last, k));
+  if (k === curPly) return; curPly = k;
+  const p = CHESS.plies[k];
+  let i = 0;
+  for (const row of p.fen.split('/')) for (const ch of row) {
+    if (ch >= '1' && ch <= '8') { for (let j = 0; j < +ch; j++) squares[i++].dataset.p = ''; }
+    else squares[i++].dataset.p = (ch === ch.toUpperCase() ? 'w' : 'b') + ch.toUpperCase();
+  }
+  squares.forEach(s => s.classList.toggle('hl', s.dataset.sq === p.from || s.dataset.sq === p.to));
+  bMove.textContent = p.san ? `${p.n} ${p.san}` : 'Start';
+  const mover = p.san ? (p.n.endsWith('.') ? 'white' : 'black') : '';
+  $$('.pbar').forEach(el => el.classList.toggle('turn', el.dataset.side === mover));
+  bNote.textContent = k === CHESS.keyPly ? CHESS.keyNote : k === last ? `${CHESS.result}. White wins.` : '';
+}
+const chessReady = boardEl ? fetch('data/chess.json', { credentials: 'same-origin' }).then(r => r.ok ? r.json() : null).catch(() => null).then(d => {
+  if (!d || !d.plies) return;
+  CHESS = d;
+  boardEl.innerHTML = Array.from({ length: 64 }, (_, i) => { const r = i >> 3, f = i & 7; return `<span class="sq ${(r + f) % 2 ? 'd' : 'l'}" data-sq="${'abcdefgh'[f]}${8 - r}"></span>`; }).join('');
+  squares = Array.from(boardEl.children);
+  // my side sits at the bottom; flip the board when I played Black
+  const me = d.me === 'black' ? 'black' : 'white', opp = me === 'white' ? 'black' : 'white';
+  if (me === 'black') squares.slice().reverse().forEach(s => boardEl.appendChild(s));
+  const bar = (el, side, role, name) => { el.className = 'pbar ' + (role === 'Me' ? 'me' : 'opp'); el.dataset.side = side;
+    el.innerHTML = `<i class="${side[0]}"></i><span class="tag">${role} · ${side === 'white' ? 'White' : 'Black'}</span><b>${esc(name || '')}</b>`; };
+  bar($('#pTop'), opp, 'Opponent', d.oppName); bar($('#pBottom'), me, 'Me', d.meName);
+  boardEl.setAttribute('aria-label', `Replay of ${d.white} vs ${d.black}, ${d.event}`);
+  bSrc.textContent = d.caption || '';
+  setPly(isStatic ? d.keyPly : d.startPly);
+}) : Promise.resolve();
 
 /* ---------- menu (U3) ---------- */
 const menu = $('#menu'), menuBtn = $('#menuBtn');
@@ -1582,6 +1653,24 @@ decksReady.then(() => {
   ScrollTrigger.batch(fresh, { start: 'top 88%', onEnter: els => gsap.to(els, { y: 0, opacity: 1, duration: .9, stagger: .1, ease: 'power3.out', overwrite: true }) });
   ScrollTrigger.refresh();
   deepLink();
+});
+
+/* ---------- chess: scroll scrubs the moves on laptop, autoplay on phone ---------- */
+chessReady.then(() => {
+  if (!CHESS) return;
+  const first = CHESS.startPly, last = CHESS.plies.length - 1;
+  mm.add(LAPTOP, () => {
+    ScrollTrigger.create({ trigger: '#chess', start: 'top top', end: () => '+=' + innerHeight * 2,
+      onUpdate: s => setPly(Math.round(first + s.progress * (last - first))) });
+  });
+  mm.add(PHONE, () => {
+    let t = null, hold = 0;
+    const stepPly = () => { if (curPly >= last) { if (++hold > 4) { hold = 0; setPly(first); } } else setPly(curPly + 1); };
+    const st = ScrollTrigger.create({ trigger: '#board', start: 'top 85%', end: 'bottom 15%',
+      onToggle: s => { clearInterval(t); if (s.isActive) t = setInterval(stepPly, 700); } });
+    return () => { clearInterval(t); st.kill(); };
+  });
+  ScrollTrigger.refresh();
 });
 
 /* ---------- about portrait parallax ---------- */

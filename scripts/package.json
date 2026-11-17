@@ -1,0 +1,7 @@
+{
+  "name": "utkarsh-raj-site-build-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Build-time tools only. Nothing here ships to the site.",
+  "devDependencies": { "sharp": "0.33.5", "chess.js": "1.0.0" }
+}

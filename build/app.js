@@ -156,7 +156,7 @@ function renderDecks() {
   grid.innerHTML = DECKS.map(d => {
     const h = d.heroSlide || 1;
     const nums = [h, Math.min(h + 1, d.slides), Math.min(h + 2, d.slides)];
-    const mine = d.mine && !/^\[Draft/.test(d.mine) ? `<div class="line-item"><span class="mono">My part</span><span>${esc(d.mine)}</span></div>` : '';
+    const mine = d.mine && !/^\[Draft/.test(d.mine) ? `<div class="line-item"><span class="mono">${esc(d.mineLabel || 'My part')}</span><span>${esc(d.mine)}</span></div>` : '';
     return `<article class="deck-card rv" id="deck-${d.id}">
       <button type="button" class="deck-stack" data-deck="${d.id}" data-slide="${h}" data-cursor="Open" aria-label="Open the ${esc(d.title)} deck">
         <span class="slide s1">${pictureHTML(d.id, nums[0], '(max-width:860px) 90vw, 560px', `${esc(d.title)}, slide ${nums[0]}`)}</span>
@@ -189,6 +189,43 @@ const decksReady = fetch('data/decks.json', { credentials: 'same-origin' })
   .then(r => r.ok ? r.json() : [])
   .catch(() => [])
   .then(list => { DECKS = Array.isArray(list) ? list : []; renderDecks(); });
+
+
+/* ---------- chess replay (data/chess.json, built by scripts/chess.mjs) ---------- */
+let CHESS = null, squares = [], curPly = -1;
+const boardEl = $('#board'), bMove = $('#bMove'), bNote = $('#bNote'), bSrc = $('#bSrc');
+function setPly(k) {
+  if (!CHESS) return;
+  const last = CHESS.plies.length - 1;
+  k = Math.max(0, Math.min(last, k));
+  if (k === curPly) return; curPly = k;
+  const p = CHESS.plies[k];
+  let i = 0;
+  for (const row of p.fen.split('/')) for (const ch of row) {
+    if (ch >= '1' && ch <= '8') { for (let j = 0; j < +ch; j++) squares[i++].dataset.p = ''; }
+    else squares[i++].dataset.p = (ch === ch.toUpperCase() ? 'w' : 'b') + ch.toUpperCase();
+  }
+  squares.forEach(s => s.classList.toggle('hl', s.dataset.sq === p.from || s.dataset.sq === p.to));
+  bMove.textContent = p.san ? `${p.n} ${p.san}` : 'Start';
+  const mover = p.san ? (p.n.endsWith('.') ? 'white' : 'black') : '';
+  $$('.pbar').forEach(el => el.classList.toggle('turn', el.dataset.side === mover));
+  bNote.textContent = k === CHESS.keyPly ? CHESS.keyNote : k === last ? `${CHESS.result}. White wins.` : '';
+}
+const chessReady = boardEl ? fetch('data/chess.json', { credentials: 'same-origin' }).then(r => r.ok ? r.json() : null).catch(() => null).then(d => {
+  if (!d || !d.plies) return;
+  CHESS = d;
+  boardEl.innerHTML = Array.from({ length: 64 }, (_, i) => { const r = i >> 3, f = i & 7; return `<span class="sq ${(r + f) % 2 ? 'd' : 'l'}" data-sq="${'abcdefgh'[f]}${8 - r}"></span>`; }).join('');
+  squares = Array.from(boardEl.children);
+  // my side sits at the bottom; flip the board when I played Black
+  const me = d.me === 'black' ? 'black' : 'white', opp = me === 'white' ? 'black' : 'white';
+  if (me === 'black') squares.slice().reverse().forEach(s => boardEl.appendChild(s));
+  const bar = (el, side, role, name) => { el.className = 'pbar ' + (role === 'Me' ? 'me' : 'opp'); el.dataset.side = side;
+    el.innerHTML = `<i class="${side[0]}"></i><span class="tag">${role} · ${side === 'white' ? 'White' : 'Black'}</span><b>${esc(name || '')}</b>`; };
+  bar($('#pTop'), opp, 'Opponent', d.oppName); bar($('#pBottom'), me, 'Me', d.meName);
+  boardEl.setAttribute('aria-label', `Replay of ${d.white} vs ${d.black}, ${d.event}`);
+  bSrc.textContent = d.caption || '';
+  setPly(isStatic ? d.keyPly : d.startPly);
+}) : Promise.resolve();
 
 /* ---------- menu (U3) ---------- */
 const menu = $('#menu'), menuBtn = $('#menuBtn');
@@ -530,6 +567,24 @@ decksReady.then(() => {
   ScrollTrigger.batch(fresh, { start: 'top 88%', onEnter: els => gsap.to(els, { y: 0, opacity: 1, duration: .9, stagger: .1, ease: 'power3.out', overwrite: true }) });
   ScrollTrigger.refresh();
   deepLink();
+});
+
+/* ---------- chess: scroll scrubs the moves on laptop, autoplay on phone ---------- */
+chessReady.then(() => {
+  if (!CHESS) return;
+  const first = CHESS.startPly, last = CHESS.plies.length - 1;
+  mm.add(LAPTOP, () => {
+    ScrollTrigger.create({ trigger: '#chess', start: 'top top', end: () => '+=' + innerHeight * 2,
+      onUpdate: s => setPly(Math.round(first + s.progress * (last - first))) });
+  });
+  mm.add(PHONE, () => {
+    let t = null, hold = 0;
+    const stepPly = () => { if (curPly >= last) { if (++hold > 4) { hold = 0; setPly(first); } } else setPly(curPly + 1); };
+    const st = ScrollTrigger.create({ trigger: '#board', start: 'top 85%', end: 'bottom 15%',
+      onToggle: s => { clearInterval(t); if (s.isActive) t = setInterval(stepPly, 700); } });
+    return () => { clearInterval(t); st.kill(); };
+  });
+  ScrollTrigger.refresh();
 });
 
 /* ---------- about portrait parallax ---------- */

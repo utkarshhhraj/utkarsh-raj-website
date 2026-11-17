@@ -286,6 +286,33 @@ html.cursor-on,html.cursor-on *{cursor:none!important}
   #dtu .float{width:60%}
 }
 
+/* ---------- chess replay ---------- */
+.board-media{background:none;overflow:visible;border-radius:0;display:flex;flex-direction:column;gap:10px}
+.board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));aspect-ratio:1/1;height:calc(100% - 124px);max-width:100%;border-radius:10px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5);flex:none}
+.sq{background-size:100% 100%;background-repeat:no-repeat;background-position:center;aspect-ratio:1/1}
+.sq.l{background-color:#ebdcbe}.sq.d{background-color:#a7896a}
+.sq.hl.l{background-color:#e3c784}.sq.hl.d{background-color:#c0a05a}
+.sq[data-p="wK"]{background-image:url(img/pieces/wK.svg)}.sq[data-p="wQ"]{background-image:url(img/pieces/wQ.svg)}.sq[data-p="wR"]{background-image:url(img/pieces/wR.svg)}
+.sq[data-p="wB"]{background-image:url(img/pieces/wB.svg)}.sq[data-p="wN"]{background-image:url(img/pieces/wN.svg)}.sq[data-p="wP"]{background-image:url(img/pieces/wP.svg)}
+.sq[data-p="bK"]{background-image:url(img/pieces/bK.svg)}.sq[data-p="bQ"]{background-image:url(img/pieces/bQ.svg)}.sq[data-p="bR"]{background-image:url(img/pieces/bR.svg)}
+.sq[data-p="bB"]{background-image:url(img/pieces/bB.svg)}.sq[data-p="bN"]{background-image:url(img/pieces/bN.svg)}.sq[data-p="bP"]{background-image:url(img/pieces/bP.svg)}
+.pbar{display:flex;align-items:center;gap:10px;font-size:14px;min-height:26px}
+.pbar i{width:14px;height:14px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.4)}
+.pbar i.w{background:#f6f1e6}.pbar i.b{background:#1a1a1a;border-color:rgba(255,255,255,.35)}
+.pbar .tag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:3px 9px;border:1px solid var(--line);color:var(--muted)}
+.pbar.me .tag{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pbar.me b{color:var(--fg)}.pbar b{font-weight:600;color:var(--muted)}
+.pbar.turn b::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-left:8px;vertical-align:middle}
+.ch-links{display:flex;flex-wrap:wrap;gap:8px;padding-top:min(14px,1.6svh)}
+.ch-links .chip{height:34px;font-size:12.5px;padding:0 14px}
+.board-cap{display:flex;align-items:baseline;gap:14px;min-height:22px}
+.board-cap b{text-transform:none;letter-spacing:.02em;font-size:14px;color:var(--accent);font-variant-numeric:tabular-nums;min-width:9ch}
+.board-cap span{color:var(--fg);font-size:14px}
+.board-src{color:var(--muted);font-size:12.5px;line-height:1.4;max-width:60ch}
+#chess .float{width:min(30%,220px)}
+@media (min-width:861px){.scene[data-scene="chess"]{height:400svh}}
+@media (max-width:860px){#chess .float{display:none}.board{height:auto;width:100%}#chess .visual{aspect-ratio:auto;height:auto}#chess .media{position:relative;inset:auto;width:100%}}
+
 /* ---------- decks (D3–D6) ---------- */
 .decks-sec .wrap{padding-block:clamp(110px,14vh,160px)}
 .deck-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px 32px}

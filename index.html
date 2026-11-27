@@ -646,8 +646,9 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 .now{font-size:13px;letter-spacing:0}
 /* hero: bigger portrait, "Raj" pulled up under the name so the middle is not an empty glow */
 @media (min-width:861px){
-  .portrait-frame{width:min(460px,36vw,calc((100svh - 150px) * .8))}
-  .raj{top:max(calc(112px + var(--name-fs) * .78), min(36svh, calc(max(100svh,640px) - 330px - var(--name-fs) * .94)))}
+  .portrait-frame{width:min(460px,36vw,calc((max(100svh,640px) - 176px - var(--name-fs) * .7) * .8))}
+  .raj{top:max(calc(112px + var(--name-fs) * .78), min(36svh, calc(max(100svh,640px) - 400px - var(--name-fs) * .94)))}
+  .hero-text{width:480px}
 }
 /* marquee pause control */
 .marquee{position:relative}
@@ -693,6 +694,9 @@ html.vb .wcard:hover{translate:0 -2px}
 html.vb .caption,html.vb .cap-line{display:none}
 html.vb .wall-head{max-width:1440px;margin:0 auto}
 @media (max-width:860px){html.vb .ring{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}html.vb .wcard{width:auto;height:auto;padding:8px}}
+
+@media (min-width:861px) and (max-height:720px){.hero-fact,.hero-mono{display:none}}
+.top .open{font-size:12.5px;font-weight:500}
 </style>
 </head>
 <body>
@@ -707,7 +711,7 @@ html.vb .wall-head{max-width:1440px;margin:0 auto}
     <a href="#decks">Decks</a>
     <a href="#certificates">Certificates</a>
     <a href="#about">About</a>
-    <span class="open mono"><i></i>Open to internships</span>
+    <span class="open"><i></i>Open to internships</span>
     <a class="cta" href="#contact">Contact</a>
   </nav>
   <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>

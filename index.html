@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="va">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -128,7 +128,7 @@
   ]
 }
 </script>
-<script>(function(){var h=document.documentElement;if(matchMedia('(prefers-reduced-motion:reduce)').matches){h.classList.add('static');return}var seen=false;try{seen=sessionStorage.getItem('ur-intro')==='1'}catch(e){}if(!seen&&!location.hash)h.classList.add('is-loading');setTimeout(function(){h.classList.remove('is-loading')},6000)})()</script>
+<script>(function(){var h=document.documentElement;if(matchMedia('(prefers-reduced-motion:reduce)').matches){h.classList.add('static');return}var seen=false;try{seen=sessionStorage.getItem('ur-intro')==='1'}catch(e){}if(!seen&&!location.hash&&!h.classList.contains('vb'))h.classList.add('is-loading');setTimeout(function(){h.classList.remove('is-loading')},6000)})()</script>
 <style>
 /* Utkarsh Raj, v2. Layout: hero with the portrait in front of the name, a hello, five chapters that stack like
    cards, the decks themselves, a 3D certificate arc, more, about, and a gold Contact the page lifts off.
@@ -475,7 +475,7 @@ html.cursor-on,html.cursor-on *{cursor:none!important}
 .wall-meta{color:var(--muted);font-size:14px;text-align:right}
 .stage3d{position:relative;height:440px;perspective:1700px;perspective-origin:50% 46%;touch-action:pan-y}
 .ring{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;transform:translateZ(-880px) rotateY(var(--ring,0deg))}
-.wcard{position:absolute;left:-210px;top:-150px;width:420px;height:300px;transform:rotateY(calc(var(--k) * 28deg)) translateZ(880px);backface-visibility:hidden;-webkit-backface-visibility:hidden;
+.wcard{position:absolute;left:-210px;top:-150px;width:420px;height:300px;transform:rotateY(var(--a,calc(var(--k) * 45deg))) translateZ(880px);backface-visibility:hidden;-webkit-backface-visibility:hidden;
   background:#fbf8f1;padding:16px;border-radius:10px;box-shadow:0 30px 70px rgba(0,0,0,.55)}
 .wcard::after{content:"";position:absolute;inset:12px;border:1px solid rgba(169,125,56,.85);border-radius:4px;pointer-events:none}
 .wcard img{width:100%;height:100%;object-fit:contain;background:#fbf8f1}
@@ -623,6 +623,76 @@ html.static .scene.ch-scene{height:auto;margin-top:0}
 html.static .chapter{position:relative;height:auto}
 html.static .scene[data-scene="decks"]{margin-top:0}
 html.static .scene[data-scene="contact"]{position:relative;height:auto}
+
+/* ================= refinement pass (Impeccable + Taste), shared by A and B ================= */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.eyebrow{font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+/* A keeps the chapter labels only; every other label above a heading goes */
+.eyebrow{display:none}
+/* small labels: the page's sans, sentence case; mono stays for dates and numbers */
+.lab{font-family:var(--f-body);font-size:13px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--muted)}
+.line-item .lab{padding-top:2px}
+.card.slide .lab{font-size:13px}
+.card.score .lab{margin-bottom:8px}
+.mcard .lab{color:var(--accent);margin-bottom:6px;font-size:13.5px;font-weight:600}
+.cap-mid .lab{display:block;margin:4px 0 6px}
+.deck-ev{color:var(--muted);font-size:13.5px;line-height:1.45}
+.deck-note{font-size:12.5px}
+.index-h{font-family:var(--f-body);font-size:15px;font-weight:600;color:var(--accent);margin:16px 0 8px}
+.hero-mono{font-size:14px}
+.hero-open{font-size:13px}
+.hero-fact{font-size:14.5px;line-height:1.45;color:var(--muted);max-width:42ch}
+.hero-light{display:none}
+.now{font-size:13px;letter-spacing:0}
+/* hero: bigger portrait, "Raj" pulled up under the name so the middle is not an empty glow */
+@media (min-width:861px){
+  .portrait-frame{width:min(460px,36vw,calc((100svh - 150px) * .8))}
+  .raj{top:max(calc(112px + var(--name-fs) * .78), min(36svh, calc(max(100svh,640px) - 330px - var(--name-fs) * .94)))}
+}
+/* marquee pause control */
+.marquee{position:relative}
+.mq-pause{position:absolute;right:var(--gut-r);top:50%;translate:0 -50%;z-index:2;height:36px;padding:0 14px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--bg);color:var(--fg);border:1px solid var(--line);opacity:.0;transition:opacity .25s}
+.marquee:hover .mq-pause,.marquee:focus-within .mq-pause,.mq-pause[aria-pressed="true"]{opacity:1}
+@media (hover:none){.mq-pause{opacity:1;height:44px}}
+/* mirrored chapters (SRCC, CUET & IIMB) so five chapters are not one layout five times */
+@media (min-width:861px){
+  .ch-scene[data-mirror] .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);grid-template-areas:"visual head" "visual lines"}
+  .ch-scene[data-mirror] .media{inset:0 0 12% 16%}
+  .ch-scene[data-mirror] .float{right:auto;left:0}
+}
+/* contact without the repeated portrait */
+.contact h2,.contact .lead{max-width:none}
+/* touch targets on phones */
+@media (max-width:860px){
+  .chip,.ch-links .chip{min-height:44px;height:auto}
+  .c-row .mail-link,.foot a{display:inline-flex;align-items:center;min-height:44px}
+  .brand{min-height:44px}
+}
+@media (hover:hover){
+  .card.paper,.media,.deck-stack{transition:translate .4s cubic-bezier(.16,1,.3,1)}
+}
+
+/* ================= variant B: strict ================= */
+html.vb .ch-index{display:none}
+html.vb .grain{display:none}
+html.vb .glare{display:none}
+html.vb .index .n{display:none}
+html.vb .index a{grid-template-columns:minmax(0,1fr) auto}
+@media (hover:hover){
+  html.vb [data-tilt]:hover,html.vb .deck-stack:hover{translate:0 -2px}
+  html.vb .media img{transition:scale .5s cubic-bezier(.16,1,.3,1)}
+  html.vb .media:hover img{scale:1.025}
+  html.vb .deck-card:hover .s1{rotate:-3deg}html.vb .deck-card:hover .s2{rotate:1.5deg}html.vb .deck-card:hover .s3{rotate:5deg}
+}
+/* certificates as a plain grid (no 3D carousel, no pinned scroll) */
+html.vb .wall{min-height:0;padding-bottom:clamp(80px,12vh,140px)}
+html.vb .stage3d{height:auto;perspective:none;padding-inline:var(--gut) var(--gut-r);max-width:1440px;margin:0 auto;width:100%}
+html.vb .ring{position:static;width:auto;height:auto;transform:none!important;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;overflow:visible;padding:0;margin:0;scroll-snap-type:none}
+html.vb .wcard{position:relative;left:auto;top:auto;width:auto;height:auto;aspect-ratio:4/3;transform:none;-webkit-box-reflect:none;box-shadow:0 18px 40px rgba(0,0,0,.35);transition:translate .4s cubic-bezier(.16,1,.3,1)}
+html.vb .wcard:hover{translate:0 -2px}
+html.vb .caption,html.vb .cap-line{display:none}
+html.vb .wall-head{max-width:1440px;margin:0 auto}
+@media (max-width:860px){html.vb .ring{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}html.vb .wcard{width:auto;height:auto;padding:8px}}
 </style>
 </head>
 <body>
@@ -631,7 +701,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 <div class="grain" aria-hidden="true"></div>
 <header class="top" id="top-bar">
   <a class="brand" href="#top"><span class="avatar" id="avatar"><img src="img/portrait.jpg" alt="" width="880" height="1100" decoding="async"></span>Utkarsh Raj</a>
-  <span class="now mono" id="nowLabel" aria-hidden="true">Portfolio · 2026</span>
+  <span class="now" id="nowLabel" aria-hidden="true"></span>
   <nav class="links" aria-label="Main">
     <a href="#iitd">Work</a>
     <a href="#decks">Decks</a>
@@ -679,17 +749,17 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 
 <main id="top">
 <!-- HERO -->
-<div class="scene" data-scene="hero" data-label="Portfolio · 2026">
+<div class="scene" data-scene="hero" data-label="">
 <section class="hero" id="hero">
-  <div class="hero-light" id="heroLight" aria-hidden="true"></div>
   <h1 class="hero-name" aria-label="Utkarsh Raj"><span class="line" aria-hidden="true"><span>U</span><span>T</span><span>K</span><span>A</span><span>R</span><span>S</span><span>H</span></span></h1>
   <span class="raj" aria-hidden="true">Raj</span>
   <div class="portrait-frame" id="heroPortrait"><img src="img/portrait.jpg" alt="Utkarsh Raj in a navy suit" width="880" height="1100" fetchpriority="high"></div>
   <div class="hero-fade" aria-hidden="true"></div>
   <div class="hero-text">
-    <span class="mono hero-mono">BMS · SSCBS, University of Delhi · New Delhi</span>
-    <span class="mono hero-open"><i></i>Open to internships</span>
+    <span class="hero-mono">Management student at SSCBS, University of Delhi</span>
+    <span class="hero-open"><i></i>Open to internships</span>
     <p class="thesis">Strategy, case competitions and research, <em>thought through a few moves ahead.</em></p>
+    <p class="hero-fact">National Rank 3 at IIT Delhi’s Startup Expo, and AIR 4 in the National Consulting Olympiad.</p>
     <div class="btns">
       <a class="btn" href="#hello">Start here <span class="arr" aria-hidden="true">↓</span></a>
       <a class="btn ghost" href="#contact">Get in touch</a>
@@ -697,6 +767,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
   </div>
 </section>
 <div class="marquee" aria-label="Highlights">
+  <button type="button" class="mq-pause" id="mqPause" aria-pressed="false" aria-label="Pause the highlights">Pause</button>
   <div class="mq-track" id="mq">
     <div class="mq-set">
       <span class="mq-item">National Rank 3 · IIT Delhi<i>✦</i></span>
@@ -725,18 +796,13 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 <section class="hello" id="hello">
   <div class="wrap">
     <div class="hello-copy">
-      <span class="mono label rv">Hello</span>
-      <p class="statement rv">I'm Utkarsh, a management student at SSCBS, University of Delhi. I'm working towards strategy consulting, and I spend my time on case competitions, primary research and market sizing.</p>
-      <div class="proof rv">
-        <div><b>#3</b><span>National rank, IIT Delhi case competition</span></div>
-        <div><b>AIR 4</b><span>National Consulting Olympiad</span></div>
-        <div><b>AIR 109</b><span>CUET UG 2026, BMS</span></div>
-        <div><b>IIMB</b><span>Admitted to IIM Bangalore</span></div>
-      </div>
-      <p class="looking rv">Looking for <b>strategy, consulting, product and founder's office internships</b>.</p>
+      <h2 class="sr-only">Introduction</h2>
+      <span class="label eyebrow">Hello</span>
+      <p class="statement">I'm Utkarsh, a management student at SSCBS, University of Delhi. I'm working towards strategy consulting, and I spend my time on case competitions, primary research and market sizing.</p>
+      <p class="looking">Looking for <b>strategy, consulting, product and founder's office internships</b>.</p>
     </div>
-    <div class="index rv">
-      <h3 class="mono label">The work, best first</h3>
+    <div class="index">
+      <h3 class="index-h">The work, best first</h3>
       <a href="#iitd"><span class="n">01</span><span class="t"><u>IIT Delhi</u><span class="s">Startup Expo Case Competition</span></span><span class="r">#3</span></a>
       <a href="#srcc"><span class="n">02</span><span class="t"><u>ShARE SRCC</u><span class="s">Consulting olympiad, then internship</span></span><span class="r">AIR 4</span></a>
       <a href="#dtu"><span class="n">03</span><span class="t"><u>DTU</u><span class="s">Polygenesis: VoltEdge</span></span><span class="r">3rd</span></a>
@@ -759,9 +825,9 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       <div class="stat"><b class="count" data-from="100" data-to="3" data-prefix="#">#3</b><span>National rank among 2,700+ participants</span></div>
     </div>
     <div class="lines">
-      <div class="line-item"><span class="mono">Two rounds</span><span>Round 2 was a lending case for Velenor Capital. The final was an investor pitch for Straeva Labs: market sizing, unit economics and a ₹100 Cr raise.</span></div>
-      <div class="line-item"><span class="mono">The night before</span><span>One day to prepare. We slept at 6 AM and were still editing the deck in the cab to IIT Delhi.</span></div>
-      <div class="line-item"><span class="mono">The room</span><span>Judges and VCs. Our first case competition, and our first podium.</span></div>
+      <div class="line-item"><span class="lab">Two rounds</span><span>Round 2 was a lending case for Velenor Capital. The final was an investor pitch for Straeva Labs: market sizing, unit economics and a ₹100 Cr raise.</span></div>
+      <div class="line-item"><span class="lab">The night before</span><span>One day to prepare. We slept at 6 AM and were still editing the deck in the cab to IIT Delhi.</span></div>
+      <div class="line-item"><span class="lab">The room</span><span>Judges and VCs. Our first case competition, and our first podium.</span></div>
       <div class="ch-links">
         <a class="chip ghost" href="decks/iitd-r2/Utkarsh-Raj-Velenor-Capital-Strategy.pdf" download>Round 2 deck · PDF <span class="arr" aria-hidden="true">↓</span></a>
         <a class="chip ghost" href="decks/iitd/Utkarsh-Raj-Straeva-Labs-Pitch.pdf" download>Final deck · PDF <span class="arr" aria-hidden="true">↓</span></a>
@@ -786,7 +852,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 </div>
 
 <!-- 02 SRCC -->
-<div class="scene ch-scene" data-scene="srcc" id="srcc" data-label="02 · ShARE SRCC">
+<div class="scene ch-scene" data-scene="srcc" id="srcc" data-mirror data-label="02 · ShARE SRCC">
 <section class="chapter">
   <div class="stage wrap">
     <div class="copy-head">
@@ -796,9 +862,9 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       <div class="stat"><b class="count sm" data-from="100" data-to="4" data-prefix="AIR ">AIR 4</b><span>All India Rank, top 10 nationally</span></div>
     </div>
     <div class="lines">
-      <div class="line-item"><span class="mono">The olympiad</span><span>A national test of analytical thinking and problem-solving. I finished fourth in India.</span></div>
-      <div class="line-item"><span class="mono">What it led to</span><span>A consulting internship in ShARE SRCC's Future Leaders Program, January to February 2026.</span></div>
-      <div class="line-item"><span class="mono">The work</span><span>Problem-solving frameworks, case analysis and research-driven consulting tasks with a national cohort.</span></div>
+      <div class="line-item"><span class="lab">The olympiad</span><span>A national test of analytical thinking and problem-solving. I finished fourth in India.</span></div>
+      <div class="line-item"><span class="lab">What it led to</span><span>A consulting internship in ShARE SRCC's Future Leaders Program, January to February 2026.</span></div>
+      <div class="line-item"><span class="lab">The work</span><span>Problem-solving frameworks, case analysis and research-driven consulting tasks with a national cohort.</span></div>
     </div>
     <div class="visual">
       <button type="button" class="media contain" data-tilt data-cursor="View" data-cert="1" aria-label="Open the National Consulting Olympiad certificate">
@@ -807,7 +873,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       </button>
       <div class="float">
         <div class="card slide" data-tilt>
-          <span class="mono">Internship · Jan to Feb 2026</span>
+          <span class="lab">Internship, Jan to Feb 2026</span>
           <strong class="serif">Consulting Intern</strong>
           <em>Future Leaders Program, ShARE SRCC</em>
           <div class="chips"><span>Frameworks</span><span>Case analysis</span><span>Research</span></div>
@@ -831,9 +897,9 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       <div class="stat"><b class="count" data-from="99" data-to="3" data-suffix="rd">3rd</b><span>Position, with Team Khatte Rasgulle</span></div>
     </div>
     <div class="lines">
-      <div class="line-item"><span class="mono">The case</span><span>Design a battery-swapping network for electric two-wheelers that can afford a lifetime battery warranty.</span></div>
-      <div class="line-item"><span class="mono">Our part</span><span>The whole deck, as a team: the network design, the warranty model and the numbers. We presented it to the judges.</span></div>
-      <div class="line-item"><span class="mono">The team</span><span>Khatte Rasgulle. Yes, that is the real name.</span></div>
+      <div class="line-item"><span class="lab">The case</span><span>Design a battery-swapping network for electric two-wheelers that can afford a lifetime battery warranty.</span></div>
+      <div class="line-item"><span class="lab">Our part</span><span>The whole deck, as a team: the network design, the warranty model and the numbers. We presented it to the judges.</span></div>
+      <div class="line-item"><span class="lab">The team</span><span>Khatte Rasgulle. Yes, that is the real name.</span></div>
     </div>
     <div class="visual">
       <button type="button" class="media" data-tilt data-cursor="View" data-image="img/dtu-team.jpg" data-cap="Team Khatte Rasgulle with their certificates at Polygenesis: VoltEdge, DTU" aria-label="Open the team photo">
@@ -853,7 +919,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 </div>
 
 <!-- 04 CUET + IIMB -->
-<div class="scene ch-scene" data-scene="admits" id="admits" data-label="04 · CUET & IIMB">
+<div class="scene ch-scene" data-scene="admits" id="admits" data-mirror data-label="04 · CUET & IIMB">
 <section class="chapter">
   <div class="stage wrap">
     <div class="copy-head">
@@ -863,9 +929,9 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       <div class="stat"><b class="count sm" data-from="999" data-to="109" data-prefix="AIR ">AIR 109</b><span>All India Rank in CUET UG 2026, plus an IIM Bangalore admit</span></div>
     </div>
     <div class="lines">
-      <div class="line-item"><span class="mono">CUET</span><span>AIR 109 for BMS and AIR 23 for BBE, with 99.96 percentile in General Aptitude and 99.89 in Mathematics.</span></div>
-      <div class="line-item"><span class="mono">IIM Bangalore</span><span>Admitted to the B.Sc. (Hons.) in Data Science, minor in Economics &amp; Business, on my first attempt.</span></div>
-      <div class="line-item"><span class="mono">The choice</span><span>I took SSCBS instead: my first preference, offered in the first round.</span></div>
+      <div class="line-item"><span class="lab">CUET</span><span>AIR 109 for BMS and AIR 23 for BBE, with 99.96 percentile in General Aptitude and 99.89 in Mathematics.</span></div>
+      <div class="line-item"><span class="lab">IIM Bangalore</span><span>Admitted to the B.Sc. (Hons.) in Data Science, minor in Economics &amp; Business, on my first attempt.</span></div>
+      <div class="line-item"><span class="lab">The choice</span><span>I took SSCBS instead: my first preference, offered in the first round.</span></div>
     </div>
     <div class="visual">
       <button type="button" class="media contain paper-bg" data-tilt data-cursor="View" data-cert="2" aria-label="Open the IIM Bangalore offer letter">
@@ -874,7 +940,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       </button>
       <div class="float">
         <div class="card slide score" data-tilt>
-          <span class="mono">Scorecard · CUET UG 2026</span>
+          <span class="lab">CUET UG 2026 scorecard</span>
           <div class="srow"><span>BMS · All India Rank</span><b class="acc">109</b></div>
           <div class="srow"><span>BBE · All India Rank</span><b>23</b></div>
           <div class="srow"><span>General Aptitude · %ile</span><b>99.96</b></div>
@@ -899,9 +965,9 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       <div class="stat"><b class="count" data-from="64" data-to="1" data-suffix="st">1st</b><span>Bihar Inter School Esports Championship 2024, with a ₹40,000 prize</span></div>
     </div>
     <div class="lines">
-      <div class="line-item"><span class="mono">Titles</span><span>State champion in the Bihar Inter School Esports Championship, and 3rd in Under-17 at the 13th Bihar State Inter School Chess Championship.</span></div>
-      <div class="line-item"><span class="mono">Rating</span><span>2000+ on Chess.com, and Best Unrated Player at a state rapid open in Bhagalpur.</span></div>
-      <div class="line-item"><span class="mono">Off the board</span><span>Chess Coordinator at Disha Nucleus, running school tournaments from registrations to results.</span></div>
+      <div class="line-item"><span class="lab">Titles</span><span>State champion in the Bihar Inter School Esports Championship, and 3rd in Under-17 at the 13th Bihar State Inter School Chess Championship.</span></div>
+      <div class="line-item"><span class="lab">Rating</span><span>2000+ on Chess.com, and Best Unrated Player at a state rapid open in Bhagalpur.</span></div>
+      <div class="line-item"><span class="lab">Off the board</span><span>Chess Coordinator at Disha Nucleus, running school tournaments from registrations to results.</span></div>
     </div>
     <div class="visual">
       <div class="media board-media">
@@ -928,8 +994,8 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 <section class="decks-sec">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="mono label rv">The work itself</div><h2 class="display rv">The decks</h2></div>
-      <p class="rv">The slides we actually presented, from the case to the final number. Open one to go through it slide by slide, or download the PDF.</p>
+      <div><div class="label eyebrow">The work itself</div><h2 class="display">The decks</h2></div>
+      <p >The slides we presented in each round, from the case to the final number. Open one to go through it slide by slide, or download the PDF.</p>
     </div>
     <div class="deck-grid" id="deckGrid"></div>
   </div>
@@ -940,7 +1006,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 <div class="scene" data-scene="wall" data-label="Certificates">
 <section class="wall" id="certificates">
   <div class="wall-head wrap">
-    <div><div class="mono label">The paper trail</div><h2 class="display">Certificates</h2></div>
+    <div><div class="label eyebrow">The paper trail</div><h2 class="display">Certificates</h2></div>
     <div class="wall-meta">Ranked from biggest to smallest. Open any one.</div>
   </div>
   <div class="stage3d" id="stage3d">
@@ -958,7 +1024,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
   <div class="wrap">
     <div class="caption" id="caption" aria-live="polite">
       <div class="cap-num"><b id="capNum">01</b><span class="mono">/ 08</span></div>
-      <div class="cap-mid"><h3 id="capTitle"></h3><span class="mono" id="capMeta"></span><p id="capText"></p></div>
+      <div class="cap-mid"><h3 id="capTitle"></h3><span class="lab" id="capMeta"></span><p id="capText"></p></div>
       <div class="cap-btns"><button type="button" class="round" id="capPrev" aria-label="Previous certificate">←</button><button type="button" class="round" id="capNext" aria-label="Next certificate">→</button></div>
     </div>
     <div class="cap-line" aria-hidden="true"><i id="capLine"></i></div>
@@ -971,34 +1037,34 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 <section class="more" id="more">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="mono label rv">Also on the record</div><h2 class="display rv">More</h2></div>
-      <p class="rv">Olympiads, programmes, research and the teams I help run.</p>
+      <div><div class="label eyebrow">Also on the record</div><h2 class="display">More</h2></div>
+      <p >Olympiads, programmes, research and the teams I help run.</p>
     </div>
     <div class="more-grid">
-      <div class="mcard rv">
-        <span class="mono">Olympiads</span>
+      <div class="mcard">
+        <span class="lab">Olympiads</span>
         <div class="mitem"><span class="big">AIR 25</span><b>National Human Resource Olympiad 2026</b><span>HRD Cell, SRCC</span></div>
         <div class="mitem"><span class="big">AIR 88</span><b>Shri Ram Finance Olympiad 2025</b><span>Vittshala, SRCC</span></div>
       </div>
-      <div class="mcard rv">
-        <span class="mono">Programmes</span>
+      <div class="mcard">
+        <span class="lab">Programmes</span>
         <div class="mitem"><b>McKinsey Forward Program</b><span>McKinsey &amp; Company</span></div>
         <div class="mitem"><b>Impact Fellowship · July 2026</b><span>Enactus Hindu College × IFSA Hindu × BfE New Delhi. Two weeks across finance, consulting and marketing, with a case competition.</span></div>
       </div>
-      <div class="mcard rv">
-        <span class="mono">Research</span>
+      <div class="mcard">
+        <span class="lab">Research</span>
         <div class="mitem"><b>The CUET Playbook</b><span>Independent primary research: surveyed 100+ students, with a core cohort of 88. Lack of structured preparation was the top pain point, at 49%.</span></div>
       </div>
-      <div class="mcard wide rv">
-        <span class="mono">Also competed in</span>
+      <div class="mcard wide">
+        <span class="lab">Also competed in</span>
         <div class="mitem"><b>Ace the Case 2026 · SummIT × AceMBA</b><span>Product management case, reached Round 3</span></div>
         <div class="mitem"><b>Neeti Tantra 2026 · Hindu College, DU</b><span>Policy case on India's grand strategy to 2035</span></div>
         <div class="mitem"><b>Revive the Failed ’26 · LSR</b><span>Diagnosed and reimagined Dunzo</span></div>
         <div class="mitem"><b>Project Dobaara · MarKSoc, DTU</b><span>Marketing case, October 2026</span></div>
         <div class="mitem"><b>Global Case Masters 2026 · IMT Ghaziabad</b><span>In progress</span></div>
       </div>
-      <div class="mcard rv">
-        <span class="mono">Leadership</span>
+      <div class="mcard">
+        <span class="lab">Leadership</span>
         <div class="mitem"><b>Organising Committee</b><span>Ecovision, the Economics Society of SSCBS · CII YI YUVA SSCBS · Crescendo, the SSCBS annual fest</span></div>
         <div class="mitem"><b>Organising Committee · Parishram SSCBS</b><span>Ran the college football league</span></div>
         <div class="mitem"><b>Chess Coordinator · Disha Nucleus</b><span>2023 to 2025</span></div>
@@ -1016,15 +1082,16 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
       <img src="img/portrait.jpg" alt="Portrait of Utkarsh Raj in a navy suit" width="880" height="1100" decoding="async" loading="lazy">
     </button>
     <div class="about-copy">
-      <span class="mono label rv">About</span>
-      <p class="statement rv">I'm from Bhagalpur, Bihar, and I study management at SSCBS. I like hard business problems: weigh every option, look for the reply you don't want to see, then commit. Competitive chess taught me that habit. The goal is simple: learn fast, build real experience, and get exceptionally good at solving problems.</p>
-      <div class="edu rv">
+      <h2 class="sr-only">About me</h2>
+      <span class="label eyebrow">About</span>
+      <p class="statement">I'm from Bhagalpur, Bihar, and I study management at SSCBS. I like hard business problems: weigh every option, look for the reply you don't want to see, then commit. Competitive chess taught me that habit. The goal is simple: learn fast, build real experience, and get exceptionally good at solving problems.</p>
+      <div class="edu">
         <div class="edu-row"><span class="y">2026 – 2029</span><div><b>Bachelor of Management Studies</b><span>Shaheed Sukhdev College of Business Studies, University of Delhi</span></div><span class="g">AIR 109</span></div>
         <div class="edu-row"><span class="y">2026</span><div><b>B.Sc. (Hons.) Data Science · admitted</b><span>IIM Bangalore · chose SSCBS</span></div><span class="g">IIMB</span></div>
         <div class="edu-row"><span class="y">2025</span><div><b>Class XII, Commerce with Mathematics (CBSE)</b><span>Disha Nucleus</span></div><span class="g">85.8%</span></div>
         <div class="edu-row"><span class="y">2023</span><div><b>Class X (ICSE)</b><span>St. Teresa's School, Bhagalpur</span></div><span class="g">88.8%</span></div>
       </div>
-      <div class="skills rv" aria-label="Skills">
+      <div class="skills" aria-label="Skills">
         <span>Primary market research</span><span>Competitor analysis</span><span>Market sizing</span><span>Structured problem-solving</span><span>Strategy decks</span><span>Financial viability</span><span>PowerPoint</span>
       </div>
     </div>
@@ -1034,15 +1101,14 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
 
 <!-- NEXT -->
 <div class="scene" data-scene="next" data-label="Coming next">
-<section class="next" id="next"><div class="wrap"><p class="mono rv">Coming next: writing, 1:1 sessions, courses, lectures and a gallery.</p></div></section>
+<section class="next" id="next"><div class="wrap"><p class="mono">Coming next: writing, 1:1 sessions, courses, lectures and a gallery.</p></div></section>
 </div>
 
 <!-- CONTACT -->
 <div class="scene" data-scene="contact" data-label="Contact">
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="c-portrait"><img src="img/portrait.jpg" alt="" width="880" height="1100" decoding="async" loading="lazy"></div>
-    <div class="mono">Contact</div>
+    <div class="label eyebrow">Contact</div>
     <h2 class="display" style="margin-top:16px">Let's <span class="serif-i">talk.</span></h2>
     <p class="lead">Internships, case competition teams, research collaborations, or a good business problem. I reply to every message.</p>
     <div class="c-actions">
@@ -1072,7 +1138,7 @@ html.static .scene[data-scene="contact"]{position:relative;height:auto}
     <button type="button" class="v-arrow" id="vPrev" aria-label="Previous">←</button>
     <div class="v-body">
       <figure class="v-figure"><picture id="vPic"><img class="v-img" id="vImg" src="data:," alt=""></picture><figcaption class="v-cap" id="vCap"></figcaption></figure>
-      <div class="v-panel" id="vPanel"><span class="mono" id="vMeta"></span><h3 id="vH"></h3><p id="vText"></p></div>
+      <div class="v-panel" id="vPanel"><span class="mono" id="vMeta"></span><h3 id="vH" hidden></h3><p id="vText"></p></div>
     </div>
     <button type="button" class="v-arrow" id="vNext" aria-label="Next">→</button>
   </div>
@@ -1091,6 +1157,7 @@ const html = document.documentElement;
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const isStatic = html.classList.contains('static');
+const VB = html.classList.contains('vb'); // variant B: strict (no tilt, no 3D arc, no entrances)
 const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
 const finePointer = matchMedia('(hover:hover) and (pointer:fine)').matches;
 const LAPTOP = '(min-width:861px)';
@@ -1160,7 +1227,7 @@ function renderViewer() {
     const c = CERTS[v.i];
     setPicture(null, c.img, c.alt || c.title);
     v.title.textContent = c.title; v.count.textContent = `${nn(v.i + 1)} / ${nn(CERTS.length)}`;
-    v.meta.textContent = c.meta; v.h.textContent = c.title; v.text.innerHTML = c.text; v.cap.textContent = '';
+    v.meta.textContent = c.meta; v.h.textContent = c.title; v.h.hidden = false; v.text.innerHTML = c.text; v.cap.textContent = '';
     v.prevBtn.hidden = v.nextBtn.hidden = false;
   } else if (v.mode === 'deck') {
     const d = v.deck, n = v.i + 1, b = slideBase(d.id, n);
@@ -1243,26 +1310,26 @@ function renderDecks() {
   grid.innerHTML = DECKS.map(d => {
     const h = d.heroSlide || 1;
     const nums = [h, Math.min(h + 1, d.slides), Math.min(h + 2, d.slides)];
-    const mine = d.mine && !/^\[Draft/.test(d.mine) ? `<div class="line-item"><span class="mono">${esc(d.mineLabel || 'My part')}</span><span>${esc(d.mine)}</span></div>` : '';
-    return `<article class="deck-card rv" id="deck-${d.id}">
+    const mine = d.mine && !/^\[Draft/.test(d.mine) ? `<div class="line-item"><span class="lab">${esc(d.mineLabel || 'My part')}</span><span>${esc(d.mine)}</span></div>` : '';
+    return `<article class="deck-card" id="deck-${d.id}">
       <button type="button" class="deck-stack" data-deck="${d.id}" data-slide="${h}" data-cursor="Open" aria-label="Open the ${esc(d.title)} deck">
         <span class="slide s1">${pictureHTML(d.id, nums[0], '(max-width:860px) 90vw, 560px', `${esc(d.title)}, slide ${nums[0]}`)}</span>
         <span class="slide s2">${pictureHTML(d.id, nums[1], '(max-width:860px) 90vw, 560px', '')}</span>
         <span class="slide s3">${pictureHTML(d.id, nums[2], '(max-width:860px) 90vw, 560px', '')}</span>
       </button>
-      <span class="mono">${esc(d.event)}</span>
+      <span class="deck-ev">${esc(d.event)}</span>
       <h3>${esc(d.title)}</h3>
       <span class="badge"><b>${esc(d.result)}</b>${esc(d.field)}</span>
       <div class="lines">
-        <div class="line-item"><span class="mono">The ask</span><span>${esc(d.ask)}</span></div>
-        <div class="line-item"><span class="mono">Our answer</span><span>${esc(d.answer)}</span></div>
+        <div class="line-item"><span class="lab">The ask</span><span>${esc(d.ask)}</span></div>
+        <div class="line-item"><span class="lab">Our answer</span><span>${esc(d.answer)}</span></div>
         ${mine}
       </div>
       <div class="btns">
         <button type="button" class="btn" data-deck="${d.id}" data-slide="1">Open the deck <span class="arr" aria-hidden="true">→</span></button>
         <a class="btn ghost" href="${d.pdf.replace(/^\//, '')}" download>PDF · ${esc(d.pdfSize)}</a>
       </div>
-      <span class="mono deck-note">${d.slides} slides · ${esc(d.note || '')}</span>
+      <span class="lab deck-note">${d.slides} slides · ${esc(d.note || '')}</span>
     </article>`;
   }).join('');
 }
@@ -1307,8 +1374,9 @@ const chessReady = boardEl ? fetch('data/chess.json', { credentials: 'same-origi
   const me = d.me === 'black' ? 'black' : 'white', opp = me === 'white' ? 'black' : 'white';
   if (me === 'black') squares.slice().reverse().forEach(s => boardEl.appendChild(s));
   const bar = (el, side, role, name) => { el.className = 'pbar ' + (role === 'Me' ? 'me' : 'opp'); el.dataset.side = side;
-    el.innerHTML = `<i class="${side[0]}"></i><span class="tag">${role} · ${side === 'white' ? 'White' : 'Black'}</span><b>${esc(name || '')}</b>`; };
-  bar($('#pTop'), opp, 'Opponent', d.oppName); bar($('#pBottom'), me, 'Me', d.meName);
+    el.innerHTML = `<i class="${side[0]}"></i><span class="tag">${role === 'White' || role === 'Black' ? role : role + ' · ' + (side === 'white' ? 'White' : 'Black')}</span><b>${esc(name || '')}</b>`; };
+  if (d.placeholder) { bar($('#pTop'), 'black', 'Black', d.black); bar($('#pBottom'), 'white', 'White', d.white); }
+  else { bar($('#pTop'), opp, 'Opponent', d.oppName); bar($('#pBottom'), me, 'Me', d.meName); }
   boardEl.setAttribute('aria-label', `Replay of ${d.white} vs ${d.black}, ${d.event}`);
   bSrc.textContent = d.caption || '';
   setPly(isStatic ? d.keyPly : d.startPly);
@@ -1429,7 +1497,16 @@ if (finePointer && heroLight) {
 
 /* ---------- marquee, paused offscreen ---------- */
 const mq = gsap.to('#mq', { xPercent: -50, duration: 38, ease: 'none', repeat: -1 });
-ScrollTrigger.create({ trigger: '.marquee', start: 'top bottom', end: 'bottom top', onToggle: s => (s.isActive ? mq.play() : mq.pause()) });
+let mqUser = false, mqHover = false, mqSeen = true;
+const mqBtn = $('#mqPause');
+const mqSync = () => { (mqUser || mqHover || !mqSeen) ? mq.pause() : mq.play(); };
+if (mqBtn) mqBtn.addEventListener('click', () => { mqUser = !mqUser; mqBtn.setAttribute('aria-pressed', mqUser); mqBtn.textContent = mqUser ? 'Play' : 'Pause'; mqBtn.setAttribute('aria-label', mqUser ? 'Play the highlights' : 'Pause the highlights'); mqSync(); });
+const mqEl = $('.marquee');
+mqEl.addEventListener('pointerenter', () => { mqHover = true; mqSync(); });
+mqEl.addEventListener('pointerleave', () => { mqHover = false; mqSync(); });
+mqEl.addEventListener('focusin', () => { mqHover = true; mqSync(); });
+mqEl.addEventListener('focusout', () => { mqHover = false; mqSync(); });
+ScrollTrigger.create({ trigger: '.marquee', start: 'top bottom', end: 'bottom top', onToggle: s => { mqSeen = s.isActive; mqSync(); } });
 
 /* ---------- scene palette for the fixed UI (section 4) ---------- */
 const scenes = $$('.scene');
@@ -1445,7 +1522,7 @@ function activate(sc) {
   ui.style.setProperty('--ui-accent', cs.getPropertyValue('--accent').trim());
   const name = sc.dataset.scene;
   rail.forEach(a => a.classList.toggle('on', a.dataset.for === name));
-  if (nowLabel && sc.dataset.label) nowLabel.textContent = sc.dataset.label;
+  if (nowLabel) nowLabel.textContent = sc.dataset.label || '';
   avatar.style.opacity = name === 'contact' ? '0' : '';
 }
 scenes.forEach(sc => {
@@ -1495,11 +1572,7 @@ function unfly() {
 ScrollTrigger.create({ trigger: '#hero', start: 'bottom 40%', onEnter: fly, onLeaveBack: unfly });
 
 /* ---------- reveals (M4) ---------- */
-gsap.set('.rv', { y: 40, opacity: 0 });
-ScrollTrigger.batch('.rv', {
-  start: 'top 88%',
-  onEnter: els => gsap.to(els, { y: 0, opacity: 1, duration: .9, stagger: .08, ease: 'power3.out', overwrite: true })
-});
+/* removed: per-section fade-ins (Taste/Impeccable). Chapters keep their own entrance in variant A. */
 
 /* ---------- counters ---------- */
 function countUp(el) {
@@ -1517,14 +1590,14 @@ mm.add({ laptop: LAPTOP, phone: PHONE }, ctx => {
   chScenes.forEach((sc, i) => {
     const ch = $('.chapter', sc);
     const head = $('.copy-head', sc), lines = $$('.line-item', sc), media = $('.media', sc), flt = $('.float', sc), count = $('.count', sc);
-    // entrance of this chapter's content
-    const tl = gsap.timeline({ paused: true })
+    // entrance of this chapter's content (variant A only; B shows everything at rest)
+    const tl = VB ? null : gsap.timeline({ paused: true })
       .from($$('.ch-index,.ch-title,.ch-event,.stat', head), { y: 40, opacity: 0, duration: .8, stagger: .07, ease: 'power3.out' })
       .from(lines, { y: 24, opacity: 0, duration: .6, stagger: .07, ease: 'power3.out' }, .25)
       .fromTo(media, { scale: .78, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: 'power3.out' }, 0)
       .from(flt, laptop ? { y: 80, rotate: 4, opacity: 0, duration: 1, ease: 'power3.out' } : { y: 40, opacity: 0, duration: .8, ease: 'power3.out' }, .2);
     let played = false;
-    ScrollTrigger.create({
+    if (!VB) ScrollTrigger.create({
       trigger: sc, start: laptop ? 'top 55%' : 'top 75%',
       onEnter: () => { if (played) return; played = true; tl.play(); if (count) countUp(count); }
     });
@@ -1544,7 +1617,7 @@ mm.add({ laptop: LAPTOP, phone: PHONE }, ctx => {
 });
 
 /* ---------- tilt (M6) ---------- */
-if (finePointer) {
+if (finePointer && !VB) {
   $$('[data-tilt]').forEach(el => {
     const rx = gsap.quickTo(el, 'rotationX', { duration: .6, ease: 'power3' });
     const ry = gsap.quickTo(el, 'rotationY', { duration: .6, ease: 'power3' });
@@ -1552,7 +1625,7 @@ if (finePointer) {
     gsap.set(el, { transformPerspective: 900 });
     el.addEventListener('pointermove', e => {
       const r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
-      ry(px * 12); rx(-py * 10);
+      ry(px * 6); rx(-py * 5);
       if (glare) { glare.style.opacity = '1'; glare.style.background = `radial-gradient(circle at ${(px + .5) * 100}% ${(py + .5) * 100}%, rgba(255,255,255,.35), transparent 55%)`; }
     });
     el.addEventListener('pointerleave', () => { rx(0); ry(0); if (glare) glare.style.opacity = '0'; });
@@ -1580,7 +1653,8 @@ if (finePointer) {
 /* ---------- certificates (K1–K5) ---------- */
 const ringEl = $('#ring'), cards = $$('.wcard', ringEl), stage3d = $('#stage3d');
 const capNum = $('#capNum'), capTitle = $('#capTitle'), capMeta = $('#capMeta'), capText = $('#capText'), capLine = $('#capLine');
-const N = cards.length, STEP = 28;
+const N = cards.length, STEP = 360 / Math.max(N, 1);
+cards.forEach((c, k) => c.style.setProperty('--a', (k * STEP) + 'deg'));
 let capI = -1;
 function caption(i) {
   i = Math.max(0, Math.min(N - 1, i));
@@ -1591,7 +1665,7 @@ function caption(i) {
 }
 caption(0);
 mm.add(LAPTOP, () => {
-  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  if (VB || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   gsap.set(ringEl, { z: -880, rotationY: 0 });
   const st = ScrollTrigger.create({
     trigger: '#certificates', start: 'top top', end: '+=350%', pin: true, scrub: true,
@@ -1649,9 +1723,6 @@ mm.add(PHONE, () => {
 
 /* ---------- reveal decks once rendered; deep link ---------- */
 decksReady.then(() => {
-  const fresh = $$('#deckGrid .rv');
-  gsap.set(fresh, { y: 40, opacity: 0 });
-  ScrollTrigger.batch(fresh, { start: 'top 88%', onEnter: els => gsap.to(els, { y: 0, opacity: 1, duration: .9, stagger: .1, ease: 'power3.out', overwrite: true }) });
   ScrollTrigger.refresh();
   deepLink();
 });
